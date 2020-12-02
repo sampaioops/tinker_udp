@@ -61,7 +61,7 @@ while(True):
     else:
         UDPServerSocket.sendto(str.encode('Command invalid'), address)
 
-    UDPServerSocket.sendto(str.encode('Command invalid'), address)
+    UDPServerSocket.sendto(str.encode('Processado com sucesso!'), address)
 
 
 
