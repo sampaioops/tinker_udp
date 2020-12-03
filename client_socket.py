@@ -24,4 +24,4 @@ while True:
  
 
 
-    #bytesToSend = str.encode(input())
+    bytesToSend = str.encode(input())
