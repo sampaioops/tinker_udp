@@ -1,67 +1,48 @@
 import ASUS.GPIO as GPIO
 import socket
 import time
+
+localIP     = "192.168.18.6"
+localPort   = 20001
+bufferSize  = 1024
  
 GPIO.setmode (GPIO.BOARD)
 GPIO.setwarnings(False)
   
-led = 37
+ledRed = 37
+ledBlue = 35
 
-GPIO.setup(led, GPIO.OUT)
-
-
-localIP     = "192.168.18.6"
-
-localPort   = 20001
-
-bufferSize  = 1024
-
- 
-
-msgFromServer       = "Hello UDP Client"
-
-bytesToSend         = str.encode(msgFromServer)
-
- 
-
-# Create a datagram socket
+GPIO.setup(ledRed, GPIO.OUT)
+GPIO.setup(ledBlue, GPIO.OUT)
 
 UDPServerSocket = socket.socket(family=socket.AF_INET, type=socket.SOCK_DGRAM)
 
- 
-
-# Bind to address and ip
-
 UDPServerSocket.bind((localIP, localPort))
-
- 
 
 print("UDP server up and listening")
 
- 
-
-# Listen for incoming datagrams
-
-messageToClient = str.encode("play red")
-
 while(True):
 
-    bytesAddressPair = UDPServerSocket.recvfrom(bufferSize)
-
-    message = bytesAddressPair[0]
-
-    address = bytesAddressPair[1]
+    message, address = UDPServerSocket.recvfrom(bufferSize)
 
     print(message.decode('utf-8'))
     if message.decode('utf-8') == 'play red':
-         GPIO.output(led, 1)
+         GPIO.output(ledRed, 1)
          time.sleep(0.5)
+         UDPServerSocket.sendto(str.encode('Red on!'), address)
     elif message.decode('utf-8') == 'stop red':	
-         GPIO.output(led, 0)
+         GPIO.output(ledRed, 0)
+         UDPServerSocket.sendto(str.encode('Red off!'), address)
+    elif message.decode('utf-8') == 'start blue':	
+         GPIO.output(ledBlue, 0)
+         UDPServerSocket.sendto(str.encode('Blue off!'), address)
+    elif message.decode('utf-8') == 'stop blue':	
+         GPIO.output(ledBlue, 0)
+         UDPServerSocket.sendto(str.encode('Blue off!'), address)
     else:
-        UDPServerSocket.sendto(str.encode('Command invalid'), address)
-
-    UDPServerSocket.sendto(str.encode('Processado com sucesso!'), address)
+         UDPServerSocket.sendto(str.encode("Command invalid!"), address)
+       
+   
 
 
 
