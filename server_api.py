@@ -33,6 +33,7 @@ while(True):
     print(message.decode('utf-8'))
 
     if GPIO.input(pir) == GPIO.HIGH:
+        print("PIR ACCESS")
         data_e_hora_atuais = datetime.now()
         data_e_hora_em_texto = data_e_hora_atuais.strftime("%d/%m/%Y %H:%M")
         UDPServerSocket.sendto(str.encode('SENSOR ATIVADO! - ' + data_e_hora_em_texto), address)
