@@ -26,7 +26,7 @@ UDPServerSocket.bind((localIP, localPort))
 
 print("UDP server up and listening")
 
-serverAddressPort   = ("192.168.18.6", 20002)
+serverAddressPort   = ("192.168.18.4", 20002)
 
 while(True):
 
@@ -40,7 +40,7 @@ while(True):
         data_e_hora_em_texto = data_e_hora_atuais.strftime("%d/%m/%Y %H:%M")
         UDPServerSocket.sendto(str.encode('SENSOR ATIVADO! - ' + data_e_hora_em_texto), serverAddressPort)
     else:
-        UDPServerSocket.sendto(str.encode(''), serverAddressPort)
+        #UDPServerSocket.sendto(str.encode(''), serverAddressPort)
 
 
     #if message.decode('utf-8') == 'play red':
