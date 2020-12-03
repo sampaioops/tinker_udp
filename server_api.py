@@ -23,23 +23,44 @@ print("UDP server up and listening")
 
 while(True):
 
-    message, address = UDPServerSocket.recvfrom(bufferSize)
+     message, address = UDPServerSocket.recvfrom(bufferSize)
 
-    print(message.decode('utf-8'))
-    if message.decode('utf-8') == 'play red':
+     print(message.decode('utf-8'))
+     if message.decode('utf-8') == 'play red':
          GPIO.output(ledRed, 1)
          time.sleep(0.5)
          UDPServerSocket.sendto(str.encode('Red on!'), address)
-    elif message.decode('utf-8') == 'stop red':	
+     elif message.decode('utf-8') == 'stop red':	
          GPIO.output(ledRed, 0)
          UDPServerSocket.sendto(str.encode('Red off!'), address)
-    elif message.decode('utf-8') == 'play blue':	
+     elif message.decode('utf-8') == 'play blue':	
          GPIO.output(ledBlue, 1)
          UDPServerSocket.sendto(str.encode('Blue off!'), address)
-    elif message.decode('utf-8') == 'stop blue':	
+     elif message.decode('utf-8') == 'stop blue':	
          GPIO.output(ledBlue, 0)
          UDPServerSocket.sendto(str.encode('Blue off!'), address)
-    else:
+     elif message.decode('utf-8') == 'play blink':
+          UDPServerSocket.sendto(str.encode('Blink on!'), address)
+          while(message.decode('utf-8') == 'play blink'):
+               count = 0
+
+               if count == 0:
+                    GPIO.output(ledBlue, 1)
+                    time.sleep(0.5)
+                    GPIO.output(ledRed, 0)
+                    count = 1
+               elif count == 1:
+                    GPIO.output(ledBlue, 0)
+                    time.sleep(0.5)
+                    GPIO.output(ledRed, 1)
+
+               message, address = UDPServerSocket.recvfrom(bufferSize)
+
+
+     elif message.decode('utf-8') == 'stop blink':
+          GPIO.output(ledBlue, 0)
+          GPIO.output(ledRed, 0)
+     else:
          UDPServerSocket.sendto(str.encode("Command invalid!"), address)
        
    
