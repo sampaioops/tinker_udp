@@ -54,7 +54,7 @@ while(True):
                     time.sleep(0.5)
                     GPIO.output(ledRed, 1)
 
-               message, address = UDPServerSocket.recvfrom(bufferSize)
+              
 
 
      elif message.decode('utf-8') == 'stop blink':
