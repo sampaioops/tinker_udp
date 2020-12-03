@@ -33,8 +33,8 @@ while(True):
     elif message.decode('utf-8') == 'stop red':	
          GPIO.output(ledRed, 0)
          UDPServerSocket.sendto(str.encode('Red off!'), address)
-    elif message.decode('utf-8') == 'start blue':	
-         GPIO.output(ledBlue, 0)
+    elif message.decode('utf-8') == 'play blue':	
+         GPIO.output(ledBlue, 1)
          UDPServerSocket.sendto(str.encode('Blue off!'), address)
     elif message.decode('utf-8') == 'stop blue':	
          GPIO.output(ledBlue, 0)
