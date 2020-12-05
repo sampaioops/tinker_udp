@@ -100,7 +100,7 @@ def handle(msg):
 
 bot = telepot.Bot('1419698093:AAHZJjuVqY9lzZ07sz9CVZnTZm-m4wgZSII')
 
-#bot.sendMessage(bot.getMe(), "Segue os comandos seguintes: \n 1.start sensor \n 2.stop sensor \n 3.play red \n 4.stop red \n 5.start blue \n 6.stop blue \n 7.start blink \n 8.stop blink")
+bot.sendMessage(1250934489, "Segue os comandos seguintes: \n 1.start sensor \n 2.stop sensor \n 3.play red \n 4.stop red \n 5.start blue \n 6.stop blue \n 7.start blink \n 8.stop blink")
 
 bot.message_loop(handle)            
 
