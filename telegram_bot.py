@@ -21,7 +21,8 @@ class CountdownTask:
     def run(self, chat_id): 
         while self._running: 
             if GPIO.input(pir) == GPIO.HIGH:
-                bot.sendMessage(chat_id, "Sensor ativado!")
+                bot.sendMessage(chat_id, "Movimento detectado!!")
+                time.sleep(1)
     
     def run_blink(self):
         count = 0
@@ -78,7 +79,7 @@ def handle(msg):
     command = msg['text']
 
     if command == 'commands':
-        bot.sendMessage(chat_id, "Segue os comandos seguintes: \n 1.start sensor \n 2.stop sensor \n 3.play red \n 4.stop red \n 5.start blue \n 6.stop blue \n 7.start blink \n 8.stop blink")
+        bot.sendMessage(chat_id, "Segue os comandos seguintes: \n 1.start sensor \n 2.stop sensor \n 3.play red \n 4.stop red \n 5.play blue \n 6.stop blue \n 7.start blink \n 8.stop blink")
 
     elif command == 'start sensor':
         c.start()
