@@ -24,10 +24,15 @@ class CountdownTask:
 
 pir = 26
 
+ledRed = 37
+ledBlue = 35
+
 GPIO.setmode (GPIO.BOARD)
 GPIO.setwarnings(False)
 
 GPIO.setup(pir, GPIO.IN)
+GPIO.setup(ledRed, GPIO.OUT)
+GPIO.setup(ledBlue, GPIO.OUT)
 
 c = CountdownTask()
 
@@ -40,6 +45,15 @@ def handle(msg):
         t.start() 
     elif command == 'stop sensor':
         c.terminate()
+    elif command == 'play red':
+         GPIO.output(ledRed, 1)
+         time.sleep(0.5)
+    elif command == 'stop red':	
+         GPIO.output(ledRed, 0)
+    elif command == 'play blue':	
+         GPIO.output(ledBlue, 1)
+    elif command == 'stop blue':	
+         GPIO.output(ledBlue, 0)
             
 
 bot = telepot.Bot('1419698093:AAHZJjuVqY9lzZ07sz9CVZnTZm-m4wgZSII')
