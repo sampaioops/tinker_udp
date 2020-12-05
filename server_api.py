@@ -26,21 +26,18 @@ UDPServerSocket.bind((localIP, localPort))
 
 print("UDP server up and listening")
 
-serverAddressPort   = ("192.168.18.4", 20002)
-
 while(True):
 
-    #message, address = UDPServerSocket.recvfrom(bufferSize)
+    message, address = UDPServerSocket.recvfrom(bufferSize)
 
-    #print(message.decode('utf-8'))
+    print(message.decode('utf-8'))
 
     if GPIO.input(pir) == GPIO.HIGH:
-        print("PIR ACCESS")
         data_e_hora_atuais = datetime.now()
         data_e_hora_em_texto = data_e_hora_atuais.strftime("%d/%m/%Y %H:%M")
-        UDPServerSocket.sendto(str.encode('SENSOR ATIVADO! - ' + data_e_hora_em_texto), serverAddressPort)
-    #else:
-        #UDPServerSocket.sendto(str.encode(''), serverAddressPort)
+        UDPServerSocket.sendto(str.encode('SENSOR ATIVADO! - ' + data_e_hora_em_texto), address)
+    else:
+        UDPServerSocket.sendto(str.encode(''), address)
 
 
     #if message.decode('utf-8') == 'play red':
