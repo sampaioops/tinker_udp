@@ -74,6 +74,7 @@ c = CountdownTask()
 
 def handle(msg):
     chat_id = msg['chat']['id']
+    print(chat_id)
     command = msg['text']
     if command == 'start sensor':
         c.start()
@@ -98,6 +99,9 @@ def handle(msg):
             
 
 bot = telepot.Bot('1419698093:AAHZJjuVqY9lzZ07sz9CVZnTZm-m4wgZSII')
+
+#bot.sendMessage(bot.getMe(), "Segue os comandos seguintes: \n 1.start sensor \n 2.stop sensor \n 3.play red \n 4.stop red \n 5.start blue \n 6.stop blue \n 7.start blink \n 8.stop blink")
+
 bot.message_loop(handle)            
 
 while 1:
