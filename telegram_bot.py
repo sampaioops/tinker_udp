@@ -18,10 +18,18 @@ GPIO.setup(pir, GPIO.IN)
 def handle(msg):
     chat_id = msg['chat']['id']
     command = msg['text']
-    if command == 'On':
+    if command == 'Ativa Sensor':
         while True:
+            
+            if command == 'break':
+                break
+            
             if GPIO.input(pir) == GPIO.HIGH:
                 bot.sendMessage(chat_id, "Sensor ativado!")
+
+    
+            
+
     
 
 
