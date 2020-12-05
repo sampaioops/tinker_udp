@@ -10,6 +10,7 @@ class CountdownTask:
       
     def __init__(self): 
         self._running = True
+        self._blink = True
 
     def start(self):
         self._running = True
@@ -21,6 +22,41 @@ class CountdownTask:
         while self._running: 
             if GPIO.input(pir) == GPIO.HIGH:
                 bot.sendMessage(chat_id, "Sensor ativado!")
+    
+    def run_blink(self):
+        count = 0
+        while self._blink:
+            
+            if count == 0:
+                 GPIO.output(ledRed, 1)
+                 GPIO.output(ledBlue, 0)
+                 time.sleep(0.5)
+                 count = 1
+            elif count == 1:
+                 GPIO.output(ledRed, 0)
+                 GPIO.output(ledBlue, 1)
+                 time.sleep(0.5)
+                 count = 0
+
+    def start_blink(self):
+        self._blink = True
+
+    def terminate_blink(self):
+        self._blink = False
+
+
+
+    def play_red(self):
+         GPIO.output(ledRed, 1)
+
+    def stop_red(self):
+         GPIO.output(ledRed, 0)
+
+    def play_blue(self):
+         GPIO.output(ledBlue, 1)
+
+    def stop_blue(self):
+         GPIO.output(ledBlue, 0)
 
 pir = 26
 
@@ -46,14 +82,19 @@ def handle(msg):
     elif command == 'stop sensor':
         c.terminate()
     elif command == 'play red':
-         GPIO.output(ledRed, 1)
-         time.sleep(0.5)
+         c.play_red()
     elif command == 'stop red':	
-         GPIO.output(ledRed, 0)
+         c.stop_red()
     elif command == 'play blue':	
-         GPIO.output(ledBlue, 1)
+         c.play_blue()
     elif command == 'stop blue':	
-         GPIO.output(ledBlue, 0)
+         c.stop_blue()
+    elif command == 'start blink':
+        c.start_blink()
+        t = Thread(target = c.run_blink) 
+        t.start()
+    elif command == 'stop blink':
+        c.terminate_blink()
             
 
 bot = telepot.Bot('1419698093:AAHZJjuVqY9lzZ07sz9CVZnTZm-m4wgZSII')
