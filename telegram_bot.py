@@ -22,7 +22,8 @@ class CountdownTask:
         while self._running: 
             if GPIO.input(pir) == GPIO.HIGH:
                 bot.sendMessage(chat_id, "Movimento detectado!!")
-                time.sleep(2)
+            
+            time.sleep(2)
     
     def run_blink(self):
         count = 0
