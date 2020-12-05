@@ -10,6 +10,9 @@ class CountdownTask:
       
     def __init__(self): 
         self._running = True
+
+    def start(self):
+        self._running = True
       
     def terminate(self): 
         self._running = False
@@ -32,6 +35,7 @@ def handle(msg):
     chat_id = msg['chat']['id']
     command = msg['text']
     if command == 'start sensor':
+        c.start()
         t = Thread(target = c.run, args =(chat_id, )) 
         t.start() 
     elif command == 'stop sensor':
