@@ -11,13 +11,13 @@ class CountdownTask:
     def __init__(self): 
         self._running = True
       
-def terminate(self): 
-    self._running = False
+    def terminate(self): 
+        self._running = False
       
-def run(self, chat_id): 
-    while self._running: 
-        if GPIO.input(pir) == GPIO.HIGH:
-            bot.sendMessage(chat_id, "Sensor ativado!")
+    def run(self, chat_id): 
+        while self._running: 
+            if GPIO.input(pir) == GPIO.HIGH:
+                bot.sendMessage(chat_id, "Sensor ativado!")
 
 pir = 26
 
