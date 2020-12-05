@@ -77,30 +77,30 @@ c = CountdownTask()
 def handle(msg):
     chat_id = msg['chat']['id']
     print(chat_id)
-    command = msg['text']
+    command = msg['text'].lower()
 
-    if command == 'commands':
+    if command.lower() == 'commands':
         bot.sendMessage(chat_id, "Segue os comandos seguintes: \n 1.start sensor \n 2.stop sensor \n 3.play red \n 4.stop red \n 5.play blue \n 6.stop blue \n 7.start blink \n 8.stop blink")
 
-    elif command == 'start sensor':
+    elif command == 'start sensor' or command == '1':
         c.start()
         t = Thread(target = c.run, args =(chat_id, )) 
         t.start() 
-    elif command == 'stop sensor':
+    elif command == 'stop sensor' or command == '2':
         c.terminate()
-    elif command == 'play red':
+    elif command == 'play red' or command == '3':
          c.play_red()
-    elif command == 'stop red':	
+    elif command == 'stop red' or command == '4':
          c.stop_red()
-    elif command == 'play blue':	
+    elif command == 'play blue' or command == '5':
          c.play_blue()
-    elif command == 'stop blue':	
+    elif command == 'stop blue' or command == '6':
          c.stop_blue()
-    elif command == 'start blink':
+    elif command == 'start blink' or command == '7':
         c.start_blink()
         t = Thread(target = c.run_blink) 
         t.start()
-    elif command == 'stop blink':
+    elif command == 'stop blink' or command == '8':
         c.terminate_blink()
             
 
